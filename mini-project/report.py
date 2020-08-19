@@ -88,6 +88,16 @@ def low_section(c_list, low):
     return range_list
 
 
+def get_emoji(concentrate):
+
+    if concentrate > 70:
+        emoji = '😊'
+    elif concentrate > 40:
+        emoji = '😐'
+    else:
+        emoji = '🙄'
+
+    return emoji
 
 # 임시 (dummy 집중도 리스트 생성)
 def cal_concentrate():
@@ -105,12 +115,15 @@ def cal_concentrate():
     return concentrate_list
 
 
-# def create_detail_plot():
-
-
 @app.route('/')
 def show_main(num=None):
-    return render_template('main.html', num=num)
+    #TODO 집중도 가져오기
+    concentrate = 30
+    emoji = get_emoji(concentrate)
+
+    return render_template('main.html', num=num, emoji=emoji)
+
+
 
 
 @app.route('/concentrate.png')
